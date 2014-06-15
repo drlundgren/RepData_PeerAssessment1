@@ -2,12 +2,27 @@
 
 
 ## Loading and preprocessing the data
-
+```{r}
+setwd("~/coursera-reproducible-research/RepData_PeerAssessment1-dc20c7c4e92aea6af318a611e2669d5b9c6cbfaf/")
+myFileZip <- "activity.zip"
+myFile <- "activity.csv"
+myData <- read.table(unz(myFileZip, myFile), header=TRUE, sep=",", stringsAsFactors = FALSE, dec =".", na.strings = "NA")
+myData2 <- na.omit(myData)
+```
 
 
 ## What is mean total number of steps taken per day?
-
-
+```{r}
+dailyTotalSteps <- tapply(myData2$steps, myData2$date, sum)
+hist(dailyTotalSteps)
+dailyAvgSteps <- mean(dailyTotalSteps)
+dailyMedianSteps <- median(dailyTotalSteps)
+#dailyAvgSteps <- tapply(myData2$steps, myData2$date, mean)
+#dailyMedianSteps <- tapply(myData2$steps, myData2$date, median)
+#hist(dailyAvgSteps)
+```
+The mean is `r dailyAvgSteps`.  
+The median is `r dailyMedianSteps`.
 
 ## What is the average daily activity pattern?
 
